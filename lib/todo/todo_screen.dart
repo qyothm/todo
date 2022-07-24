@@ -26,6 +26,7 @@ class _TodoScreenState extends State<TodoScreen> {
           return TodoItem(
             todo: todo,
             onTodoChanged: _handleTodoChange,
+            onTodoDelete: _deleteTodoItem,
           );
         }).toList(),
       ),
@@ -49,6 +50,12 @@ class _TodoScreenState extends State<TodoScreen> {
       _todoList.add(Todo(name: title, checked: false));
     });
     _textFieldController.clear();
+  }
+
+  void _deleteTodoItem(Todo todo) {
+    setState(() {
+      _todoList.removeWhere((element) => element.name == todo.name);
+    });
   }
 
   Future<void> _displayDialog() async {

@@ -10,10 +10,11 @@ class TodoItem extends StatelessWidget {
   TodoItem({
     required this.todo,
     required this.onTodoChanged,
+    required this.onTodoDelete,
   }) : super(key: ObjectKey(todo));
 
   final Todo todo;
-  final dynamic onTodoChanged;
+  final dynamic onTodoChanged, onTodoDelete;
 
   TextStyle? _getTextStyle(bool checked) {
     if (!checked) return null;
@@ -34,6 +35,11 @@ class TodoItem extends StatelessWidget {
         child: Text(todo.name[0]),
       ),
       title: Text(todo.name, style: _getTextStyle(todo.checked)),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete),
+        highlightColor: Colors.blue,
+        onPressed: () => onTodoDelete(todo),
+      ),
     );
   }
 }
